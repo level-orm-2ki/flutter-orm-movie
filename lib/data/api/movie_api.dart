@@ -22,4 +22,19 @@ class MovieApi {
     final json = jsonDecode(response.body);
     return MovieDto.fromJson(json);
   }
+
+  Future<MovieDto> getMovieByGenres(int genres) async {
+    final String apiUrl =
+        '${TheMovieDbConfig.baseUrl}/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=$genres';
+
+    final http.Response response = await http.get(
+      Uri.parse(apiUrl),
+      headers: headers,
+    );
+    if (response.statusCode != 200) {
+      throw Exception('TheMoviedb api by genrs error');
+    }
+    final json = jsonDecode(response.body);
+    return MovieDto.fromJson(json);
+  }
 }
