@@ -13,9 +13,9 @@ class Movie with _$Movie {
     required String originalTitle,
     required String overview,
     required String releaseDate,
-    required String voteCount,
-    required String popularity,
-    required String voteAverage,
+    required int voteCount,
+    required num popularity,
+    required num voteAverage,
     required bool video,
   }) = _Movie;
 
