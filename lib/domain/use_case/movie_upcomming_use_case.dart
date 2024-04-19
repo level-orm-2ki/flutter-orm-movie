@@ -8,7 +8,7 @@ class MovieUpcommingUseCase {
     required MovieRepository repository,
   }) : _repository = repository;
 
-  Future<List<Movie>> getMovies() {
-    return _repository.getMovieInfoData();
+  Future<List<Movie>> getMovies() async{
+    return await _repository.getMovieInfoData();
   }
 }
