@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:level_ormmovie/core/config/themoviedb_config.dart';
 import 'package:http/http.dart' as http;
+import 'package:level_ormmovie/data/dto/movie_detail_dto.dart';
 import '../dto/movie_dto.dart';
 
 class MovieApi {
