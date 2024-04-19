@@ -3,7 +3,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class MockSharedPreferencesUtil implements SharedPreferencesUtil {
   String? key;
+  List<String>? value;
   int getStringListCallCount = 0;
+  int createStringListCallCount = 0;
 
   @override
   Future<List<String>?> getStringList(String key) async {
@@ -24,8 +26,12 @@ class MockSharedPreferencesUtil implements SharedPreferencesUtil {
   }
 
   @override
-  Future<bool> createStringList(String key, List<String> value) {
-    throw UnimplementedError();
+  Future<bool> createStringList(String key , List<String> value) async {
+    this.key = key;
+    this.value = value;
+    createStringListCallCount++;
+
+    return true;
   }
 
   @override
