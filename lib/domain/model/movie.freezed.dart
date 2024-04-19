@@ -26,9 +26,9 @@ mixin _$Movie {
   String get originalTitle => throw _privateConstructorUsedError;
   String get overview => throw _privateConstructorUsedError;
   String get releaseDate => throw _privateConstructorUsedError;
-  String get voteCount => throw _privateConstructorUsedError;
-  String get popularity => throw _privateConstructorUsedError;
-  String get voteAverage => throw _privateConstructorUsedError;
+  int get voteCount => throw _privateConstructorUsedError;
+  num get popularity => throw _privateConstructorUsedError;
+  num get voteAverage => throw _privateConstructorUsedError;
   bool get video => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,9 +48,9 @@ abstract class $MovieCopyWith<$Res> {
       String originalTitle,
       String overview,
       String releaseDate,
-      String voteCount,
-      String popularity,
-      String voteAverage,
+      int voteCount,
+      num popularity,
+      num voteAverage,
       bool video});
 }
 
@@ -106,15 +106,15 @@ class _$MovieCopyWithImpl<$Res, $Val extends Movie>
       voteCount: null == voteCount
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       popularity: null == popularity
           ? _value.popularity
           : popularity // ignore: cast_nullable_to_non_nullable
-              as String,
+              as num,
       voteAverage: null == voteAverage
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
-              as String,
+              as num,
       video: null == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
@@ -137,9 +137,9 @@ abstract class _$$MovieImplCopyWith<$Res> implements $MovieCopyWith<$Res> {
       String originalTitle,
       String overview,
       String releaseDate,
-      String voteCount,
-      String popularity,
-      String voteAverage,
+      int voteCount,
+      num popularity,
+      num voteAverage,
       bool video});
 }
 
@@ -193,15 +193,15 @@ class __$$MovieImplCopyWithImpl<$Res>
       voteCount: null == voteCount
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       popularity: null == popularity
           ? _value.popularity
           : popularity // ignore: cast_nullable_to_non_nullable
-              as String,
+              as num,
       voteAverage: null == voteAverage
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
-              as String,
+              as num,
       video: null == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
@@ -241,11 +241,11 @@ class _$MovieImpl implements _Movie {
   @override
   final String releaseDate;
   @override
-  final String voteCount;
+  final int voteCount;
   @override
-  final String popularity;
+  final num popularity;
   @override
-  final String voteAverage;
+  final num voteAverage;
   @override
   final bool video;
 
@@ -315,9 +315,9 @@ abstract class _Movie implements Movie {
       required final String originalTitle,
       required final String overview,
       required final String releaseDate,
-      required final String voteCount,
-      required final String popularity,
-      required final String voteAverage,
+      required final int voteCount,
+      required final num popularity,
+      required final num voteAverage,
       required final bool video}) = _$MovieImpl;
 
   factory _Movie.fromJson(Map<String, dynamic> json) = _$MovieImpl.fromJson;
@@ -335,11 +335,11 @@ abstract class _Movie implements Movie {
   @override
   String get releaseDate;
   @override
-  String get voteCount;
+  int get voteCount;
   @override
-  String get popularity;
+  num get popularity;
   @override
-  String get voteAverage;
+  num get voteAverage;
   @override
   bool get video;
   @override

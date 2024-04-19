@@ -4,7 +4,7 @@ class MovieApi {
   final headers = {
     'accept': 'application/json',
     'Authorization':
-        'Bearer ${TheMovieDdConfig.accessToken}'
+        'Bearer ${TheMovieDbConfig.accessToken}'
   };
 
 }
