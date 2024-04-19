@@ -1,16 +1,19 @@
 # level_ormmovie
 
-A new Flutter project.
+영화정보를 알려주는 어플리케이션
 
-## Getting Started
+## git Convention 
 
-This project is a starting point for a Flutter application.
+[ADD] : 추가
+[MODIFY] : 변경
+[CHORE] : 기타등등 변경
+[FIX] :bug fix
+[REFACTOR] : refactoring
 
-A few resources to get you started if this is your first Flutter project:
+ex) [ADD] model 추가
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### pr
+- 기능구현 상세하게 작성할것! 
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+  
