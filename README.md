@@ -15,5 +15,11 @@ ex) [ADD] model 추가<br>
 ### pr
 - 기능구현 상세하게 작성할것! 
 
+#### 사용한 라이브러리
+- @freezed
+- dotenv
+'flutter pub add flutter_dotenv'
+  https://pub.dev/packages/flutter_dotenv
+
 
   
