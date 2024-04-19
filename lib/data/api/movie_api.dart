@@ -6,12 +6,12 @@ import '../dto/movie_dto.dart';
 class MovieApi {
   final headers = {
     'accept': 'application/json',
-    'Authorization': 'Bearer ${TheMovieDdConfig.accessToken}'
+    'Authorization': 'Bearer ${TheMovieDbConfig.accessToken}'
   };
 
   Future<MovieDto> getMovieInfo() async {
     final String apiUrl =
-        '${TheMovieDdConfig.baseUrl}/3/movie/upcoming?language=ko&page=1';
+        '${TheMovieDbConfig.baseUrl}/3/movie/upcoming?language=ko&page=1';
     final http.Response response = await http.get(
       Uri.parse(apiUrl),
       headers: headers,
