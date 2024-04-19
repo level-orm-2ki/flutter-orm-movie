@@ -37,4 +37,17 @@ class MovieApi {
     final json = jsonDecode(response.body);
     return MovieDto.fromJson(json);
   }
+  Future<MovieDetailDto> getMovieDetail(int movie_Id) async {
+    final String apiUrl = '${TheMovieDbConfig.baseUrl}/3/movie/$movie_Id';
+
+    final http.Response response = await http.get(
+      Uri.parse(apiUrl),
+      headers: headers,
+    );
+    if (response.statusCode != 200) {
+      throw Exception('Error on Movie Detail db api with Network');
+    }
+    return MovieDetailDto.fromJson(jsonDecode(response.body));
+  }
+
 }
