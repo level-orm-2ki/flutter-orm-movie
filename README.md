@@ -4,13 +4,13 @@
 
 ## git Convention 
 
-[ADD] : 추가
-[MODIFY] : 변경
-[CHORE] : 기타등등 변경
-[FIX] :bug fix
-[REFACTOR] : refactoring
+[ADD] : 추가 <br>
+[MODIFY] : 변경 <br>
+[CHORE] : 기타등등 변경<br>
+[FIX] :bug fix<br>
+[REFACTOR] : refactoring<br>
 
-ex) [ADD] model 추가
+ex) [ADD] model 추가<br>
 
 ### pr
 - 기능구현 상세하게 작성할것! 
