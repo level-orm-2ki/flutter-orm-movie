@@ -18,4 +18,15 @@ class MovieRepositoryImpl implements MovieRepository {
     }
     return dto.results!.map((e) => e.toMovie()).toList();
   }
+
+  @override
+  Future<List<Movie>> getMoviesByGenres(int genres) async {
+    final movieDto = await _api.getMovieByGenres(genres);
+
+    if (movieDto.results == null) {
+      throw Exception('장르 별 영화 정보를 가져오는데 실패했습니다.');
+    }
+
+    return movieDto.results!.map((e) => e.toMovie()).toList();
+  }
 }
