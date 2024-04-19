@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:level_ormmovie/data_soruce/api/movie_genre_local_api.dart';
+import 'package:level_ormmovie/data/api/movie_genre_local_api.dart';
 
 import '../mock/mock_shared_preferences_uitl.dart';
 
