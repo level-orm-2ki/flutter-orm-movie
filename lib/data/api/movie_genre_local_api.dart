@@ -13,4 +13,10 @@ class MovieGenreLocalApi {
     return value?.map((e) => jsonDecode(e) as Map<String, dynamic>).toList() ??
         [];
   }
+
+  Future<bool> createGenresMap(List<Map<String, dynamic>> genres) async {
+    final value = genres.map((e) => jsonEncode(e)).toList();
+
+    return await _prefs.createStringList('genres', value);
+  }
 }
