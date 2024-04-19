@@ -1,3 +1,5 @@
-abstract interface class MovieRepository{
+import '../model/movie.dart';
 
+abstract interface class MovieRepository{
+Future<List<Movie>> getMovieInfoData();
 }
