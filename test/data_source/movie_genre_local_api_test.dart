@@ -48,5 +48,31 @@ void main() {
         expect(mockSharedPreferencesUtil.key, expected);
       });
     });
+
+    group('createGenresMap 메소드는', () {
+      test('genres 키에 genres Map 객체를 저장한다.', () async {
+        // given
+        final genres = [
+          {'id': 28, 'name': 'Action'}
+        ];
+
+        // when
+        await movieGenreLocalApi.createGenresMap(genres);
+
+        // then
+        expect(mockSharedPreferencesUtil.key, 'genres');
+      });
+
+      test('SharedPreferencesUtil의 createStringList 메소드를 1번 호출한다.', () async {
+        // given
+        int expected = 1;
+
+        // when
+        await movieGenreLocalApi.createGenresMap([]);
+
+        // then
+        expect(mockSharedPreferencesUtil.createStringListCallCount, expected);
+      });
+    });
   });
 }
