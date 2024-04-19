@@ -31,9 +31,27 @@ class MovieApi {
       Uri.parse(apiUrl),
       headers: headers,
     );
+
     if (response.statusCode != 200) {
       throw Exception('TheMoviedb api by genrs error');
     }
+
     return MovieDto.fromJson(jsonDecode(response.body));
+  }
+
+  Future<MovieDto> getMoviesByTitle(String query) async {
+    final String apiUrl =
+        '${TheMovieDbConfig.baseUrl}/3/search/movie?query=$query&include_adult=false&language=ko&page=1';
+
+    final http.Response response = await http.get(
+      Uri.parse(apiUrl),
+      headers: headers,
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('TheMoviedb api by genrs error');
+    }
+
+    return MovieDto.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
   }
 }
