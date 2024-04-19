@@ -19,8 +19,8 @@ class MovieApi {
     if (response.statusCode != 200) {
       throw Exception('TheMoviedb api error');
     }
-    final json = jsonDecode(response.body);
-    return MovieDto.fromJson(json);
+
+    return MovieDto.fromJson(jsonDecode(response.body));
   }
 
   Future<MovieDto> getMovieByGenres(int genres) async {
@@ -34,7 +34,6 @@ class MovieApi {
     if (response.statusCode != 200) {
       throw Exception('TheMoviedb api by genrs error');
     }
-    final json = jsonDecode(response.body);
-    return MovieDto.fromJson(json);
+    return MovieDto.fromJson(jsonDecode(response.body));
   }
 }
