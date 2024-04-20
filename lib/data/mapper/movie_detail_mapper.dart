@@ -10,7 +10,7 @@ extension ToMovieDetail on MovieDetailDto {
          releaseDate: releaseDate ?? '', // "revenue": 683813734
          status: status ?? '', // "status": "Released",
          title: title ?? '', //  "title": "Dune: Part Two",
-         voteAverage: voteAverage!.toInt(),
+         voteAverage: voteAverage?.toInt() ?? -1,
     );
   }
 }

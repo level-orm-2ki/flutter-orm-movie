@@ -7,5 +7,5 @@ Future<List<Movie>> getMovieInfoData();
 
 Future<List<Movie>> getMoviesByGenres(int genres);
 
-Future<MovieDetail> getMovieDetail(int movie_Id);
+Future<MovieDetail> getMovieDetail(int movieId);
 }
