@@ -4,9 +4,12 @@ import 'package:level_ormmovie/data/dto/movie_dto.dart';
 
 class MockMovieApiImpl implements MovieApi {
   @override
-  Future<MovieDto> getMovieByGenres(int genres) {
-    // TODO: implement getMovieByGenres
-    throw UnimplementedError();
+  Future<MovieDto> getMovieByGenres(int genres) async {
+    final genreVal = genres;
+
+    return MovieDto(results: [
+      ResultDto(genreIds: [genreVal]),
+    ]);
   }
 
   @override
