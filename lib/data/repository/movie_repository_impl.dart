@@ -38,4 +38,14 @@ class MovieRepositoryImpl implements MovieRepository {
     return movieDetailDto.toMovieDetail();
   }
 
+  @override
+  Future<List<Movie>> getMoviesByTitle(String query) async {
+    final movieDto = await _movieApi.getMoviesByTitle(query);
+
+    if (movieDto.results == null) {
+      throw Exception('제목 검색으로 인한 영화 정보를 가져오는데 실패했습니다.');
+    }
+
+    return movieDto.results!.map((e) => e.toMovie()).toList();
+  }
 }
