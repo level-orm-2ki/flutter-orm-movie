@@ -1,6 +1,8 @@
 import 'package:level_ormmovie/data/api/movie_api.dart';
+import 'package:level_ormmovie/data/mapper/movie_detail_mapper.dart';
 import 'package:level_ormmovie/data/mapper/movie_mapper.dart';
 import 'package:level_ormmovie/domain/model/movie.dart';
+import 'package:level_ormmovie/domain/model/movie_detail.dart';
 import '../../domain/repository/movie_repository.dart';
 
 class MovieRepositoryImpl implements MovieRepository {
@@ -29,4 +31,11 @@ class MovieRepositoryImpl implements MovieRepository {
 
     return movieDto.results!.map((e) => e.toMovie()).toList();
   }
+
+  @override
+  Future<MovieDetail> getMovieDetail(int movie_Id) async {
+    final movieDetailDto = await _movieApi.getMovieDetail(movie_Id);
+    return movieDetailDto.toMovieDetail();
+  }
+
 }
