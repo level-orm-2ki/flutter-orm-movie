@@ -8,7 +8,11 @@ class MockMovieApiImpl implements MovieApi {
     final genreVal = genres;
 
     return MovieDto(results: [
-      ResultDto(genreIds: [genreVal]),
+      ResultDto(
+        genreIds: [
+          genreVal,
+        ],
+      ),
     ]);
   }
 
@@ -25,9 +29,14 @@ class MockMovieApiImpl implements MovieApi {
   }
 
   @override
-  Future<MovieDto> getMoviesByTitle(String query) {
-    // TODO: implement getMoviesByTitle
-    throw UnimplementedError();
+  Future<MovieDto> getMoviesByTitle(String query) async {
+    final queryVal = query;
+
+    return MovieDto(results: [
+      ResultDto(
+        title: queryVal,
+      ),
+    ]);
   }
 
   @override
