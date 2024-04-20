@@ -56,7 +56,9 @@ void main() async {
     });
 
     group('MovieApi getMoviesByTitle은', () { 
-      group('String query 입력에 따라 다른 결과를 리턴하', () { })
+      group('String query 입력에 따라 다른 결과를 리턴하는데', () { 
+        test('query에 \'달마\'를 넣으면 제목에', () => null)
+      });
     });
   });
 }
