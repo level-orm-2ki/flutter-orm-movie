@@ -8,4 +8,6 @@ Future<List<Movie>> getMovieInfoData();
 Future<List<Movie>> getMoviesByGenres(int genres);
 
 Future<MovieDetail> getMovieDetail(int movieId);
+
+Future<List<Movie>> getMoviesByTitle(String query);
 }
