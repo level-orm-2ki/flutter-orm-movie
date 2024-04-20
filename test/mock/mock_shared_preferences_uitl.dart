@@ -26,12 +26,22 @@ class MockSharedPreferencesUtil implements SharedPreferencesUtil {
   }
 
   @override
-  Future<bool> createStringList(String key , List<String> value) async {
+  Future<bool> createStringList(String key, List<String> value) async {
     this.key = key;
     this.value = value;
     createStringListCallCount++;
 
     return true;
+  }
+
+  @override
+  Future<bool> createString(String key, String value) {
+    throw Exception();
+  }
+
+  @override
+  Future<String?> getString(String key) {
+    throw Exception();
   }
 
   @override

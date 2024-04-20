@@ -1,20 +1,32 @@
 import 'package:level_ormmovie/data/api/movie_genre_local_api.dart';
 
-class MockMovieGenreApiImpl implements MovieGenreLocalApi {
+class MockMovieGenreLocalApiImpl implements MovieGenreLocalApi {
   String? key;
   int getGenresMapCallCount = 0;
   int createGenresMapCallCount = 0;
+  int getGenreUpdatedDateCallCount = 0;
+  int createGenreUpdatedDateCallCount = 0;
+  bool createGenreUpdatedDateValue = false;
+  List<Map<String, dynamic>> getGenresMapReturnValue = [];
+  String genreUpdatedDate = '';
+  bool createGenresMapReturnValue = false;
 
   void init() {
     key = null;
     getGenresMapCallCount = 0;
     createGenresMapCallCount = 0;
+    getGenreUpdatedDateCallCount = 0;
+    createGenreUpdatedDateCallCount = 0;
+    genreUpdatedDate = '';
+    getGenresMapReturnValue = [];
+    createGenreUpdatedDateValue = false;
+    createGenresMapReturnValue = false;
   }
 
   @override
   Future<bool> createGenresMap(List<Map<String, dynamic>> genres) async {
-    // TODO: implement createGenresMap
-    throw UnimplementedError();
+    createGenresMapCallCount++;
+    return createGenresMapReturnValue;
   }
 
   @override
@@ -23,5 +35,17 @@ class MockMovieGenreApiImpl implements MovieGenreLocalApi {
     return [
       {'id': 28, 'name': 'Action'}
     ];
+  }
+
+  @override
+  Future<bool> createGenreUpdatedDate() async {
+    createGenreUpdatedDateCallCount++;
+    return createGenreUpdatedDateValue!;
+  }
+
+  @override
+  Future<String?> getGenreUpdatedDate() async {
+    getGenreUpdatedDateCallCount++;
+    return genreUpdatedDate;
   }
 }

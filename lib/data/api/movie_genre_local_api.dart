@@ -19,4 +19,15 @@ class MovieGenreLocalApi {
 
     return await _prefs.createStringList('genres', value);
   }
+
+  Future<bool> createGenreUpdatedDate() async {
+    final date = DateTime.now();
+    final value = '${date.year}-${date.month}-${date.day}';
+
+    return await _prefs.createString('genreUpdateDate', value);
+  }
+
+  Future<String?> getGenreUpdatedDate() async {
+    return await _prefs.getString('genreUpdateDate');
+  }
 }
