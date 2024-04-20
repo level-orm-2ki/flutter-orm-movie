@@ -15,4 +15,16 @@ class SharedPreferencesUtil {
 
     return await prefs.setStringList(key, value);
   }
+
+  Future<bool> createString(String key, String value) async {
+    final prefs = await sharedPreferences;
+
+    return await prefs.setString(key, value);
+  }
+
+  Future<String?> getString(String key) async {
+    final prefs = await sharedPreferences;
+
+    return prefs.getString(key);
+  }
 }
