@@ -21,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     _searchController = TextEditingController(text: '');
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<MovieViewModel>().getUpComingMovieInfo();
       context.read<MovieViewModel>().getMovieGenres();
     });
@@ -52,6 +52,7 @@ class _MainScreenState extends State<MainScreen> {
               onChanged: (e) {
                 movieViewModel.searchQuery = e;
               },
+
               decoration: InputDecoration(
                 labelText: '영화 제목 검색',
                 hintText: '제목을 입력하세요',
@@ -65,6 +66,7 @@ class _MainScreenState extends State<MainScreen> {
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('한글자 이상의 제목을 입력해 주세요')));
                     }
+
                   },
                 ),
               ),
@@ -130,6 +132,7 @@ class _MainScreenState extends State<MainScreen> {
                         itemBuilder: (context, index) {
                           final movie = movieViewModel.movies[index];
                           return ListTile(
+
                             leading: Image.network(
                               '$imageUrl${movie.posterPath}',
                             ),
@@ -149,6 +152,7 @@ class _MainScreenState extends State<MainScreen> {
                               setState(() {
                                 selectedMovieId = movie.id;
                               });
+
                             },
                           );
                         },

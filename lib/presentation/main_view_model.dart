@@ -20,8 +20,6 @@ class MovieViewModel with ChangeNotifier {
   int? _selectedGenreId;
   String _searchQuery = '';
 
-
-
   String get searchQuery => _searchQuery;
 
   set searchQuery(String value) {
@@ -43,7 +41,8 @@ class MovieViewModel with ChangeNotifier {
         _movieGenreRepository = movieGenreRepository;
 
   Future<void> getUpComingMovieInfo() async {
-    movies = await MovieUpcomingUseCase(movieRepository: _movieRepository).execute();
+    movies =
+        await MovieUpcomingUseCase(movieRepository: _movieRepository).execute();
     notifyListeners();
   }
 
