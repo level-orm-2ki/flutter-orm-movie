@@ -2,13 +2,13 @@ import 'package:level_ormmovie/domain/model/movie.dart';
 import 'package:level_ormmovie/domain/repository/movie_repository.dart';
 
 class MovieUpcomingUseCase {
-  final MovieRepository _repository;
+  final MovieRepository _movieRepository;
 
   const MovieUpcomingUseCase({
-    required MovieRepository repository,
-  }) : _repository = repository;
+    required MovieRepository movieRepository,
+  }) : _movieRepository = movieRepository;
 
-  Future<List<Movie>> getMovies() async{
-    return await _repository.getMovieInfoData();
+  Future<List<Movie>> execute() async{
+    return await _movieRepository.getMovieInfoData();
   }
 }
