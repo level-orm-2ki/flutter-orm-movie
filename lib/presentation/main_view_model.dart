@@ -41,7 +41,7 @@ class MovieViewModel with ChangeNotifier {
         _movieGenreRepository = movieGenreRepository;
 
   Future<void> getUpComingMovieInfo() async {
-    movies = await MovieUpcomingUseCase(repository: _movieRepository).execute();
+    movies = await MovieUpcomingUseCase(movieRepository: _movieRepository).execute();
     notifyListeners();
   }
 
@@ -52,9 +52,9 @@ class MovieViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getMoviesByGenres(int genres) async {
+  Future<void> getMoviesByGenres(int genreId) async {
     moviesByGenre = await GetMoviesByGenresUseCase(movieRepository: _movieRepository)
-        .execute(genres);
+        .execute(genreId);
     notifyListeners();
   }
 
