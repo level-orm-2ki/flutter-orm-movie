@@ -16,7 +16,6 @@ class _MainScreenState extends State<MainScreen> {
   int? selectedMovieId;
   bool isLatestSelected = true;
   late TextEditingController _searchController;
-  bool isLoading = false;
 
   @override
   void initState() {
