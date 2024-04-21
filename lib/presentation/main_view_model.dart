@@ -14,11 +14,13 @@ import '../domain/use_case/movie_upcomming_use_case.dart';
 class MovieViewModel with ChangeNotifier {
   final MovieRepository _movieRepository;
   final MovieGenreRepository _movieGenreRepository;
+
   List<Movie> movies = [];
   List<MovieGenre> genres = [];
   int? _selectedGenreId;
   String _searchQuery = '';
-  List<Movie> moviesByGenre = [];
+
+
 
   String get searchQuery => _searchQuery;
 
@@ -53,7 +55,7 @@ class MovieViewModel with ChangeNotifier {
   }
 
   Future<void> getMoviesByGenres(int genreId) async {
-    moviesByGenre = await GetMoviesByGenresUseCase(movieRepository: _movieRepository)
+    movies = await GetMoviesByGenresUseCase(movieRepository: _movieRepository)
         .execute(genreId);
     notifyListeners();
   }

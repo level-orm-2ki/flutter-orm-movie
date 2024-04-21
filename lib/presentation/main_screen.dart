@@ -61,6 +61,9 @@ class _MainScreenState extends State<MainScreen> {
                     if (movieViewModel.searchQuery.isNotEmpty) {
                       movieViewModel
                           .getMovieByTitle(movieViewModel.searchQuery);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('한글자 이상의 제목을 입력해 주세요')));
                     }
                   },
                 ),
@@ -82,6 +85,10 @@ class _MainScreenState extends State<MainScreen> {
                           isLatestSelected = value!;
                           selectedMovieId = null;
                           movieViewModel.selectedGenreId = null;
+
+                          if(isLatestSelected){
+                            movieViewModel.getUpComingMovieInfo();
+                          }
                         });
                       },
                     ),
@@ -117,7 +124,7 @@ class _MainScreenState extends State<MainScreen> {
           Expanded(
             child: isLatestSelected
                 ? (movieViewModel.movies.isEmpty
-                    ? const Center(child: CircularProgressIndicator())
+                    ? const Center(child: Text('영화 정보가 없습니다!'))
                     : ListView.builder(
                         itemCount: movieViewModel.movies.length,
                         itemBuilder: (context, index) {
@@ -146,12 +153,12 @@ class _MainScreenState extends State<MainScreen> {
                           );
                         },
                       ))
-                : (movieViewModel.moviesByGenre.isEmpty
-                    ? const Center(child: CircularProgressIndicator())
+                : (movieViewModel.movies.isEmpty
+                    ? const Center(child: Text('선택한 장르의 영화 정보가 없습니다!'))
                     : ListView.builder(
-                        itemCount: movieViewModel.moviesByGenre.length,
+                        itemCount: movieViewModel.movies.length,
                         itemBuilder: (context, index) {
-                          final movie = movieViewModel.moviesByGenre[index];
+                          final movie = movieViewModel.movies[index];
                           return ListTile(
                             leading: Image.network(
                               '$imageUrl${movie.posterPath}',
