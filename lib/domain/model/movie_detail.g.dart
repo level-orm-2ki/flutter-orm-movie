@@ -15,6 +15,7 @@ _$MovieDetailImpl _$$MovieDetailImplFromJson(Map<String, dynamic> json) =>
       status: json['status'] as String,
       title: json['title'] as String,
       voteAverage: json['voteAverage'] as int,
+      posterPath: json['posterPath'] as String,
     );
 
 Map<String, dynamic> _$$MovieDetailImplToJson(_$MovieDetailImpl instance) =>
@@ -26,4 +27,5 @@ Map<String, dynamic> _$$MovieDetailImplToJson(_$MovieDetailImpl instance) =>
       'status': instance.status,
       'title': instance.title,
       'voteAverage': instance.voteAverage,
+      'posterPath': instance.posterPath,
     };

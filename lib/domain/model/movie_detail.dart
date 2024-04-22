@@ -15,7 +15,8 @@ class MovieDetail with _$MovieDetail {
     required String releaseDate, // "revenue": 683813734
     required String status, // "status": "Released",
     required String title, //  "title": "Dune: Part Two",
-    required int voteAverage // "vote_average": 8.293,
+    required int voteAverage, // "vote_average": 8.293,
+    required String posterPath,
   }) = _MovieDetail;
 
   factory MovieDetail.fromJson(Map<String, Object?> json) =>

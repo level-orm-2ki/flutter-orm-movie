@@ -29,7 +29,9 @@ mixin _$MovieDetail {
       throw _privateConstructorUsedError; // "status": "Released",
   String get title =>
       throw _privateConstructorUsedError; //  "title": "Dune: Part Two",
-  int get voteAverage => throw _privateConstructorUsedError;
+  int get voteAverage =>
+      throw _privateConstructorUsedError; // "vote_average": 8.293,
+  String get posterPath => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,7 +52,8 @@ abstract class $MovieDetailCopyWith<$Res> {
       String releaseDate,
       String status,
       String title,
-      int voteAverage});
+      int voteAverage,
+      String posterPath});
 }
 
 /// @nodoc
@@ -73,6 +76,7 @@ class _$MovieDetailCopyWithImpl<$Res, $Val extends MovieDetail>
     Object? status = null,
     Object? title = null,
     Object? voteAverage = null,
+    Object? posterPath = null,
   }) {
     return _then(_value.copyWith(
       genres: null == genres
@@ -103,6 +107,10 @@ class _$MovieDetailCopyWithImpl<$Res, $Val extends MovieDetail>
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
               as int,
+      posterPath: null == posterPath
+          ? _value.posterPath
+          : posterPath // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -122,7 +130,8 @@ abstract class _$$MovieDetailImplCopyWith<$Res>
       String releaseDate,
       String status,
       String title,
-      int voteAverage});
+      int voteAverage,
+      String posterPath});
 }
 
 /// @nodoc
@@ -143,6 +152,7 @@ class __$$MovieDetailImplCopyWithImpl<$Res>
     Object? status = null,
     Object? title = null,
     Object? voteAverage = null,
+    Object? posterPath = null,
   }) {
     return _then(_$MovieDetailImpl(
       genres: null == genres
@@ -173,6 +183,10 @@ class __$$MovieDetailImplCopyWithImpl<$Res>
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
               as int,
+      posterPath: null == posterPath
+          ? _value.posterPath
+          : posterPath // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -187,7 +201,8 @@ class _$MovieDetailImpl implements _MovieDetail {
       required this.releaseDate,
       required this.status,
       required this.title,
-      required this.voteAverage})
+      required this.voteAverage,
+      required this.posterPath})
       : _genres = genres;
 
   factory _$MovieDetailImpl.fromJson(Map<String, dynamic> json) =>
@@ -216,10 +231,13 @@ class _$MovieDetailImpl implements _MovieDetail {
 //  "title": "Dune: Part Two",
   @override
   final int voteAverage;
+// "vote_average": 8.293,
+  @override
+  final String posterPath;
 
   @override
   String toString() {
-    return 'MovieDetail(genres: $genres, overView: $overView, popularity: $popularity, releaseDate: $releaseDate, status: $status, title: $title, voteAverage: $voteAverage)';
+    return 'MovieDetail(genres: $genres, overView: $overView, popularity: $popularity, releaseDate: $releaseDate, status: $status, title: $title, voteAverage: $voteAverage, posterPath: $posterPath)';
   }
 
   @override
@@ -237,7 +255,9 @@ class _$MovieDetailImpl implements _MovieDetail {
             (identical(other.status, status) || other.status == status) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.voteAverage, voteAverage) ||
-                other.voteAverage == voteAverage));
+                other.voteAverage == voteAverage) &&
+            (identical(other.posterPath, posterPath) ||
+                other.posterPath == posterPath));
   }
 
   @JsonKey(ignore: true)
@@ -250,7 +270,8 @@ class _$MovieDetailImpl implements _MovieDetail {
       releaseDate,
       status,
       title,
-      voteAverage);
+      voteAverage,
+      posterPath);
 
   @JsonKey(ignore: true)
   @override
@@ -274,7 +295,8 @@ abstract class _MovieDetail implements MovieDetail {
       required final String releaseDate,
       required final String status,
       required final String title,
-      required final int voteAverage}) = _$MovieDetailImpl;
+      required final int voteAverage,
+      required final String posterPath}) = _$MovieDetailImpl;
 
   factory _MovieDetail.fromJson(Map<String, dynamic> json) =
       _$MovieDetailImpl.fromJson;
@@ -293,6 +315,8 @@ abstract class _MovieDetail implements MovieDetail {
   String get title;
   @override //  "title": "Dune: Part Two",
   int get voteAverage;
+  @override // "vote_average": 8.293,
+  String get posterPath;
   @override
   @JsonKey(ignore: true)
   _$$MovieDetailImplCopyWith<_$MovieDetailImpl> get copyWith =>
