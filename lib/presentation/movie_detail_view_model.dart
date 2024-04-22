@@ -9,9 +9,6 @@ class MovieDetailViewModel with ChangeNotifier {
       {required GetMovieDetailByMovieIdUseCase getMovieDetailByMovieIdUseCase})
       : _getMovieDetailByMovieIdUseCase = getMovieDetailByMovieIdUseCase;
 
-  int selectedMovieId = 0;
-
-
   MovieDetail moviesDetailOnViewModel = const MovieDetail(
     genres: [],
     overView: 'over view',
