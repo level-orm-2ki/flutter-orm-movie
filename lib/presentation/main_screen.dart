@@ -3,6 +3,11 @@ import 'package:provider/provider.dart';
 import 'package:level_ormmovie/presentation/main_view_model.dart';
 
 import '../core/config/themoviedb_config.dart';
+import '../data/api/movie_api.dart';
+import '../data/repository/movie_repository_impl.dart';
+import '../domain/use_case/get_movie_detail_by_movie_Id_use_case.dart';
+import 'movie_detail_view.dart';
+import 'movie_detail_view_model.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -98,11 +103,33 @@ class _MainScreenState extends State<MainScreen> {
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              onTap: () {
-                                setState(() {
-                                  selectedMovieId = movie.id;
-                                });
+                              onTap: ()async {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ChangeNotifierProvider(
+                                      create: (_) => MovieDetailViewModel(
+                                        getMovieDetailByMovieIdUseCase:
+                                        GetMovieDetailByMovieIdUseCase(
+                                            movieRepository:
+                                            MovieRepositoryImpl(
+                                                movieApi: MovieApi())),
+                                      ),
+                                      child: MovieDetailView(
+                                        movieId: movie.id,
+                                        movieDetailViewModel: MovieDetailViewModel(
+                                            getMovieDetailByMovieIdUseCase:
+                                            GetMovieDetailByMovieIdUseCase(
+                                                movieRepository:
+                                                MovieRepositoryImpl(
+                                                    movieApi:
+                                                    MovieApi()))),
+                                      ),
+                                    ),
+                                  ),
+                                );
                               },
+
                             );
                           },
                         ),
