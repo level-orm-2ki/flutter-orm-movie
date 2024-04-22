@@ -11,6 +11,7 @@ extension ToMovieDetail on MovieDetailDto {
          status: status ?? '', // "status": "Released",
          title: title ?? '', //  "title": "Dune: Part Two",
          voteAverage: voteAverage?.toInt() ?? -1,
+      posterPath: posterPath ?? '',
     );
   }
 }
