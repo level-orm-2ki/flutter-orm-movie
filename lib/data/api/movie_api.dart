@@ -55,8 +55,8 @@ class MovieApi {
 
     return MovieDto.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
   }
-  Future<MovieDetailDto> getMovieDetail(int movie_Id) async {
-    final String apiUrl = '${TheMovieDbConfig.baseUrl}/3/movie/$movie_Id';
+  Future<MovieDetailDto> getMovieDetail(int movieId) async {
+    final String apiUrl = '${TheMovieDbConfig.baseUrl}/3/movie/$movieId';
 
     final http.Response response = await http.get(
       Uri.parse(apiUrl),
