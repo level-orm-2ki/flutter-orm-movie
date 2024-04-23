@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:level_ormmovie/data/api/movie_api.dart';
+import 'package:level_ormmovie/domain/use_case/get_movie_detail_by_movie_Id_use_case.dart';
+import 'package:level_ormmovie/presentation/movie_detail_view.dart';
+import 'package:level_ormmovie/presentation/movie_detail_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:level_ormmovie/presentation/main_view_model.dart';
 
 import '../core/config/themoviedb_config.dart';
+import '../data/repository/movie_repository_impl.dart';
 import '../domain/model/movie_genre.dart';
 
 class MainScreen extends StatefulWidget {
@@ -21,7 +26,7 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     _searchController = TextEditingController(text: '');
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       context.read<MovieViewModel>().getUpComingMovieInfo();
       context.read<MovieViewModel>().getMovieGenres();
     });
@@ -52,7 +57,6 @@ class _MainScreenState extends State<MainScreen> {
               onChanged: (e) {
                 movieViewModel.searchQuery = e;
               },
-
               decoration: InputDecoration(
                 labelText: '영화 제목 검색',
                 hintText: '제목을 입력하세요',
@@ -62,11 +66,7 @@ class _MainScreenState extends State<MainScreen> {
                     if (movieViewModel.searchQuery.isNotEmpty) {
                       movieViewModel
                           .getMovieByTitle(movieViewModel.searchQuery);
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('한글자 이상의 제목을 입력해 주세요')));
                     }
-
                   },
                 ),
               ),
@@ -87,10 +87,6 @@ class _MainScreenState extends State<MainScreen> {
                           isLatestSelected = value!;
                           selectedMovieId = null;
                           movieViewModel.selectedGenreId = null;
-
-                          if(isLatestSelected){
-                            movieViewModel.getUpComingMovieInfo();
-                          }
                         });
                       },
                     ),
@@ -126,67 +122,107 @@ class _MainScreenState extends State<MainScreen> {
           Expanded(
             child: isLatestSelected
                 ? (movieViewModel.movies.isEmpty
-                    ? const Center(child: Text('영화 정보가 없습니다!'))
-                    : ListView.builder(
-                        itemCount: movieViewModel.movies.length,
-                        itemBuilder: (context, index) {
-                          final movie = movieViewModel.movies[index];
-                          return ListTile(
-
-                            leading: Image.network(
-                              '$imageUrl${movie.posterPath}',
+                ? const Center(child: CircularProgressIndicator())
+                : ListView.builder(
+              itemCount: movieViewModel.movies.length,
+              itemBuilder: (context, index) {
+                final movie = movieViewModel.movies[index];
+                return ListTile(
+                  leading: Image.network(
+                    '$imageUrl${movie.posterPath}',
+                  ),
+                  title: Text(
+                    movie.title,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: Text(
+                    movie.overview,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChangeNotifierProvider(
+                          create: (_) => MovieDetailViewModel(
+                            getMovieDetailByMovieIdUseCase:
+                            GetMovieDetailByMovieIdUseCase(
+                                movieRepository:
+                                MovieRepositoryImpl(
+                                    movieApi: MovieApi())),
+                          ),
+                          child: MovieDetailView(
+                            movieId: movie.id,
+                            movieDetailViewModel: MovieDetailViewModel(
+                                getMovieDetailByMovieIdUseCase:
+                                GetMovieDetailByMovieIdUseCase(
+                                    movieRepository:
+                                    MovieRepositoryImpl(
+                                        movieApi:
+                                        MovieApi()))),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            ))
+                : (movieViewModel.moviesByGenre.isEmpty
+                ? const Center(child: CircularProgressIndicator())
+                : ListView.builder(
+              itemCount: movieViewModel.moviesByGenre.length,
+              itemBuilder: (context, index) {
+                final movie = movieViewModel.moviesByGenre[index];
+                return ListTile(
+                  leading: Image.network(
+                    '$imageUrl${movie.posterPath}',
+                  ),
+                  title: Text(
+                    movie.title,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: Text(
+                    movie.overview,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  onTap: () async {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChangeNotifierProvider(
+                          create: (_) => MovieDetailViewModel(
+                            getMovieDetailByMovieIdUseCase:
+                            GetMovieDetailByMovieIdUseCase(
+                              movieRepository: MovieRepositoryImpl(
+                                  movieApi: MovieApi()),
                             ),
-                            title: Text(
-                              movie.title,
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            subtitle: Text(
-                              movie.overview,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            onTap: () {
-                              setState(() {
-                                selectedMovieId = movie.id;
-                              });
-
-                            },
-                          );
-                        },
-                      ))
-                : (movieViewModel.movies.isEmpty
-                    ? const Center(child: Text('선택한 장르의 영화 정보가 없습니다!'))
-                    : ListView.builder(
-                        itemCount: movieViewModel.movies.length,
-                        itemBuilder: (context, index) {
-                          final movie = movieViewModel.movies[index];
-                          return ListTile(
-                            leading: Image.network(
-                              '$imageUrl${movie.posterPath}',
-                            ),
-                            title: Text(
-                              movie.title,
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            subtitle: Text(
-                              movie.overview,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            onTap: () {
-                              setState(() {
-                                selectedMovieId = movie.id;
-                              });
-                            },
-                          );
-                        },
-                      )),
+                          ),
+                          child: MovieDetailView(
+                            movieId: movie.id,
+                            movieDetailViewModel: MovieDetailViewModel(
+                                getMovieDetailByMovieIdUseCase:
+                                GetMovieDetailByMovieIdUseCase(
+                                    movieRepository:
+                                    MovieRepositoryImpl(
+                                        movieApi:
+                                        MovieApi()))),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            )),
           )
         ],
       ),

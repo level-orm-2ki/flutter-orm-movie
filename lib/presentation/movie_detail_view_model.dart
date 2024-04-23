@@ -6,14 +6,27 @@ class MovieDetailViewModel with ChangeNotifier {
   final GetMovieDetailByMovieIdUseCase _getMovieDetailByMovieIdUseCase;
   MovieDetail? moviesDetail;
 
-  bool isLoading = false;
-
   MovieDetailViewModel(
       {required GetMovieDetailByMovieIdUseCase getMovieDetailByMovieIdUseCase})
       : _getMovieDetailByMovieIdUseCase = getMovieDetailByMovieIdUseCase;
 
-  Future<void> getMovieDetailByMovieIdInfo(movieId) async {
-    moviesDetail = await _getMovieDetailByMovieIdUseCase.execute(movieId);
-    notifyListeners();
+  MovieDetail moviesDetailOnViewModel = const MovieDetail(
+    genres: [],
+    overView: 'over view',
+    popularity: -1,
+    releaseDate: '',
+    status: 'status',
+    title: 'title',
+    voteAverage: -1,
+    posterPath: 'posterPath',
+  );
+
+  // bool isLoading = false;
+
+  Future<void> getMovieDetailOnViewModel(int movieId) async {
+    moviesDetailOnViewModel =
+    await _getMovieDetailByMovieIdUseCase.execute(movieId);
+
+      notifyListeners();
   }
 }
