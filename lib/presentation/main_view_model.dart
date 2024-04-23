@@ -19,7 +19,7 @@ class MovieViewModel with ChangeNotifier {
   List<MovieGenre> genres = [];
   int? _selectedGenreId;
   String _searchQuery = '';
-  List<Movie> moviesByGenre = [];
+
 
   String get searchQuery => _searchQuery;
 
