@@ -4,6 +4,7 @@ import 'package:level_ormmovie/domain/use_case/get_movie_detail_by_movie_Id_use_
 
 class MovieDetailViewModel with ChangeNotifier {
   final GetMovieDetailByMovieIdUseCase _getMovieDetailByMovieIdUseCase;
+  MovieDetail? moviesDetail;
 
   MovieDetailViewModel(
       {required GetMovieDetailByMovieIdUseCase getMovieDetailByMovieIdUseCase})
@@ -25,6 +26,7 @@ class MovieDetailViewModel with ChangeNotifier {
   Future<void> getMovieDetailOnViewModel(int movieId) async {
     moviesDetailOnViewModel =
     await _getMovieDetailByMovieIdUseCase.execute(movieId);
-    notifyListeners();
+
+      notifyListeners();
   }
 }
