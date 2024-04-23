@@ -35,8 +35,7 @@ class _MovieDetailViewState extends State<MovieDetailView> {
     final movieDetailViewModel = context.watch<MovieDetailViewModel>();
     movieDetailViewModel.getMovieDetailOnViewModel(widget.movieId);
     final String imageUrl = '${TheMovieDbConfig.imageUrl}/t/p/w500';
-    final String posterImageUrl =
-    movieDetailViewModel.moviesDetailOnViewModel.posterPath.toString();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
@@ -49,73 +48,71 @@ class _MovieDetailViewState extends State<MovieDetailView> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(32.0),
-          child: posterImageUrl.isEmpty
-              ? Center(child: CircularProgressIndicator())
+          child: movieDetailViewModel.moviesDetailOnViewModel.posterPath ==
+                  'posterPath'
+              ? const Center(child: CircularProgressIndicator())
               : Column(
-            children: [
-              Image.network(
-                '$imageUrl${movieDetailViewModel.moviesDetailOnViewModel.posterPath}',
-                width: 500,
-                // height: 500,
-              ),
-              SizedBox(height: 15),
-              Text(
-                movieDetailViewModel.moviesDetailOnViewModel.title,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              SizedBox(height: 10),
-              Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.star,
-                          color: Colors.orangeAccent,
-                          size: 30,
-                        ),
-                        Text(
-                          movieDetailViewModel
-                              .moviesDetailOnViewModel.voteAverage
-                              .toString(),
-                          style: TextStyle(
-                            fontSize: 30,
-                          ),
-                        ),
-                        SizedBox(width: 20),
-                      ],
+                    Image.network(
+                      '$imageUrl${movieDetailViewModel.moviesDetailOnViewModel.posterPath}',
                     ),
-                    Container(
-                      alignment: Alignment.center,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                    SizedBox(height: 15),
+                    Text(
+                      movieDetailViewModel.moviesDetailOnViewModel.title,
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(movieDetailViewModel
-                              .moviesDetailOnViewModel.status),
-                          Text(movieDetailViewModel
-                              .moviesDetailOnViewModel.popularity
-                              .toString()),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.star,
+                                color: Colors.orangeAccent,
+                                size: 30,
+                              ),
+                              Text(
+                                movieDetailViewModel
+                                    .moviesDetailOnViewModel.voteAverage
+                                    .toString(),
+                                style: TextStyle(
+                                  fontSize: 30,
+                                ),
+                              ),
+                              SizedBox(width: 20),
+                            ],
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(movieDetailViewModel
+                                    .moviesDetailOnViewModel.status),
+                                Text(movieDetailViewModel
+                                    .moviesDetailOnViewModel.popularity
+                                    .toString()),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),
+                    SizedBox(height: 10),
+                    SizedBox(height: 10),
+                    Text(
+                      movieDetailViewModel.moviesDetailOnViewModel.overView,
+                      overflow: TextOverflow.fade,
+                    )
+                    // Text(movieDetailViewModel.getMovieDetailByMovieIdInfo(selectedMovieId).toString()),
                   ],
                 ),
-              ),
-              SizedBox(height: 10),
-              SizedBox(height: 10),
-              Text(
-                movieDetailViewModel.moviesDetailOnViewModel.overView,
-                overflow: TextOverflow.fade,
-              )
-              // Text(movieDetailViewModel.getMovieDetailByMovieIdInfo(selectedMovieId).toString()),
-            ],
-          ),
         ),
       ),
     );

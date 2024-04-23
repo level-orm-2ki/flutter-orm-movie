@@ -18,7 +18,7 @@ class MovieDetailViewModel with ChangeNotifier {
     status: 'status',
     title: 'title',
     voteAverage: -1,
-    posterPath: 'posterPath',
+    posterPath :'posterPath',
   );
 
   // bool isLoading = false;
