@@ -25,19 +25,19 @@ void diSetup() {
       movieGenreLocalApi: MovieGenreLocalApi(SharedPreferencesUtil()),
       movieGenreApi: MovieGenreApi()));
   getIt.registerSingleton<MovieUpcomingUseCase>(
-      MovieUpcomingUseCase(movieRepository: getIt<MovieRepository>()));
+      MovieUpcomingUseCase(movieRepository: getIt()));
   getIt.registerSingleton<GetMovieGenreUseCase>(GetMovieGenreUseCase(
       movieGenreRepository: getIt<MovieGenreRepository>()));
   getIt.registerSingleton<GetMoviesByTitleUseCase>(
-      GetMoviesByTitleUseCase(movieRepository: getIt<MovieRepository>()));
+      GetMoviesByTitleUseCase(movieRepository: getIt()));
   getIt.registerSingleton<GetMovieDetailByMovieIdUseCase>(
       GetMovieDetailByMovieIdUseCase(
-          movieRepository: getIt<MovieRepository>()));
+          movieRepository: getIt()));
   getIt.registerFactory<MovieViewModel>(
       () => MovieViewModel(
           movieRepository: getIt<MovieRepository>(),
-          movieGenreRepository: getIt<MovieGenreRepository>()), instanceName: 'mainView');
+          movieGenreRepository: getIt()), instanceName: 'mainView');
   getIt.registerFactory<MovieDetailViewModel>(() => MovieDetailViewModel(
-        getMovieDetailByMovieIdUseCase: getIt<GetMovieDetailByMovieIdUseCase>(),
+        getMovieDetailByMovieIdUseCase: getIt(),
       ));
 }
