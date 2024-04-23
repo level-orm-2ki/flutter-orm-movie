@@ -8,6 +8,7 @@ import 'package:level_ormmovie/data/repository/movie_repository_impl.dart';
 import 'package:level_ormmovie/di/di_setup.dart';
 import 'package:level_ormmovie/presentation/main_screen.dart';
 import 'package:level_ormmovie/presentation/main_view_model.dart';
+import 'package:level_ormmovie/router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import 'core/util/shared_preferences_util.dart';
@@ -24,23 +25,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
         useMaterial3: true,
       ),
-      home: ChangeNotifierProvider(
-        create: (context) => MovieViewModel(
-          movieGenreRepository: MovieGenreRepositoryImpl(
-            movieGenreApi: MovieGenreApi(),
-            movieGenreLocalApi: MovieGenreLocalApi(SharedPreferencesUtil()),
-          ),
-          movieRepository: MovieRepositoryImpl(movieApi: MovieApi()),
-        ),
-        child: MainScreen(),
-      ),
+      routerConfig: router,
     );
   }
 }
