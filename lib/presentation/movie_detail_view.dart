@@ -19,27 +19,21 @@ class _MovieDetailViewState extends State<MovieDetailView> {
   @override
   void initState() {
     super.initState();
-    widget.movieId;
-    widget.movieDetailViewModel;
-  }
-
-  @override
-  void dispose() {
-    widget.movieId;
-    widget.movieDetailViewModel;
-    super.dispose();
+    Future.microtask(() => context
+        .read<MovieDetailViewModel>()
+        .getMovieDetailOnViewModel(widget.movieId));
   }
 
   @override
   Widget build(BuildContext context) {
     final movieDetailViewModel = context.watch<MovieDetailViewModel>();
-    movieDetailViewModel.getMovieDetailOnViewModel(widget.movieId);
+
     final String imageUrl = '${TheMovieDbConfig.imageUrl}/t/p/w500';
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: Text(
+        title: const Text(
           'level orm movie detail',
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
@@ -59,7 +53,7 @@ class _MovieDetailViewState extends State<MovieDetailView> {
                     SizedBox(height: 15),
                     Text(
                       movieDetailViewModel.moviesDetailOnViewModel.title,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w700,
                       ),
@@ -72,7 +66,7 @@ class _MovieDetailViewState extends State<MovieDetailView> {
                         children: [
                           Row(
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.star,
                                 color: Colors.orangeAccent,
                                 size: 30,
@@ -81,7 +75,7 @@ class _MovieDetailViewState extends State<MovieDetailView> {
                                 movieDetailViewModel
                                     .moviesDetailOnViewModel.voteAverage
                                     .toString(),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 30,
                                 ),
                               ),
@@ -110,7 +104,6 @@ class _MovieDetailViewState extends State<MovieDetailView> {
                       movieDetailViewModel.moviesDetailOnViewModel.overView,
                       overflow: TextOverflow.fade,
                     )
-                    // Text(movieDetailViewModel.getMovieDetailByMovieIdInfo(selectedMovieId).toString()),
                   ],
                 ),
         ),

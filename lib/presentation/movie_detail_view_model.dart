@@ -26,7 +26,6 @@ class MovieDetailViewModel with ChangeNotifier {
   Future<void> getMovieDetailOnViewModel(int movieId) async {
     moviesDetailOnViewModel =
     await _getMovieDetailByMovieIdUseCase.execute(movieId);
-
       notifyListeners();
   }
 }
