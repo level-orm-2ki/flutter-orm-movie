@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:level_ormmovie/data/api/movie_api.dart';
 import 'package:level_ormmovie/domain/use_case/get_movie_detail_by_movie_Id_use_case.dart';
 import 'package:level_ormmovie/presentation/movie_detail_view.dart';
@@ -143,31 +144,7 @@ class _MainScreenState extends State<MainScreen> {
                               overflow: TextOverflow.ellipsis,
                             ),
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ChangeNotifierProvider(
-                                    create: (_) => MovieDetailViewModel(
-                                      getMovieDetailByMovieIdUseCase:
-                                          GetMovieDetailByMovieIdUseCase(
-                                        movieRepository: MovieRepositoryImpl(
-                                          movieApi: MovieApi(),
-                                        ),
-                                      ),
-                                    ),
-                                    child: MovieDetailView(
-                                      movieId: movie.id,
-                                      movieDetailViewModel: MovieDetailViewModel(
-                                          getMovieDetailByMovieIdUseCase:
-                                              GetMovieDetailByMovieIdUseCase(
-                                                  movieRepository:
-                                                      MovieRepositoryImpl(
-                                                          movieApi:
-                                                              MovieApi()))),
-                                    ),
-                                  ),
-                                ),
-                              );
+                              context.push('/detail', extra: movie.id);
                             },
                           );
                         },
@@ -195,30 +172,7 @@ class _MainScreenState extends State<MainScreen> {
                               overflow: TextOverflow.ellipsis,
                             ),
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ChangeNotifierProvider(
-                                    create: (_) => MovieDetailViewModel(
-                                      getMovieDetailByMovieIdUseCase:
-                                          GetMovieDetailByMovieIdUseCase(
-                                        movieRepository: MovieRepositoryImpl(
-                                            movieApi: MovieApi()),
-                                      ),
-                                    ),
-                                    child: MovieDetailView(
-                                      movieId: movie.id,
-                                      movieDetailViewModel: MovieDetailViewModel(
-                                          getMovieDetailByMovieIdUseCase:
-                                              GetMovieDetailByMovieIdUseCase(
-                                                  movieRepository:
-                                                      MovieRepositoryImpl(
-                                                          movieApi:
-                                                              MovieApi()))),
-                                    ),
-                                  ),
-                                ),
-                              );
+                              context.push('/detail', extra: movie.id);
                             },
                           );
                         },

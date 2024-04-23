@@ -27,7 +27,7 @@ void diSetup() {
   getIt.registerSingleton<MovieUpcomingUseCase>(
       MovieUpcomingUseCase(movieRepository: getIt()));
   getIt.registerSingleton<GetMovieGenreUseCase>(GetMovieGenreUseCase(
-      movieGenreRepository: getIt<MovieGenreRepository>()));
+      movieGenreRepository: getIt()));
   getIt.registerSingleton<GetMoviesByTitleUseCase>(
       GetMoviesByTitleUseCase(movieRepository: getIt()));
   getIt.registerSingleton<GetMovieDetailByMovieIdUseCase>(
@@ -35,7 +35,7 @@ void diSetup() {
           movieRepository: getIt()));
   getIt.registerFactory<MovieViewModel>(
       () => MovieViewModel(
-          movieRepository: getIt<MovieRepository>(),
+          movieRepository: getIt(),
           movieGenreRepository: getIt()), instanceName: 'mainView');
   getIt.registerFactory<MovieDetailViewModel>(() => MovieDetailViewModel(
         getMovieDetailByMovieIdUseCase: getIt(),
