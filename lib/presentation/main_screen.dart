@@ -100,12 +100,11 @@ class _MainScreenState extends State<MainScreen> {
                     setState(() {
                       movieViewModel.selectedGenreId = newValue;
                       isLatestSelected = false;
+                      print("${movieViewModel.selectedGenreId}");
 
                       // 선택된 장르에 따라 영화 정보 가져오기
                       if (newValue != null) {
-                        context
-                            .read<MovieViewModel>()
-                            .getMoviesByGenres(newValue);
+                        movieViewModel.getMoviesByGenres(newValue);
                       }
                     });
                   },
@@ -122,107 +121,108 @@ class _MainScreenState extends State<MainScreen> {
           Expanded(
             child: isLatestSelected
                 ? (movieViewModel.movies.isEmpty
-                ? const Center(child: CircularProgressIndicator())
-                : ListView.builder(
-              itemCount: movieViewModel.movies.length,
-              itemBuilder: (context, index) {
-                final movie = movieViewModel.movies[index];
-                return ListTile(
-                  leading: Image.network(
-                    '$imageUrl${movie.posterPath}',
-                  ),
-                  title: Text(
-                    movie.title,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  subtitle: Text(
-                    movie.overview,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ChangeNotifierProvider(
-                          create: (_) => MovieDetailViewModel(
-                            getMovieDetailByMovieIdUseCase:
-                            GetMovieDetailByMovieIdUseCase(
-                                movieRepository:
-                                MovieRepositoryImpl(
-                                    movieApi: MovieApi())),
-                          ),
-                          child: MovieDetailView(
-                            movieId: movie.id,
-                            movieDetailViewModel: MovieDetailViewModel(
-                                getMovieDetailByMovieIdUseCase:
-                                GetMovieDetailByMovieIdUseCase(
-                                    movieRepository:
-                                    MovieRepositoryImpl(
-                                        movieApi:
-                                        MovieApi()))),
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
-            ))
-                : (movieViewModel.moviesByGenre.isEmpty
-                ? const Center(child: CircularProgressIndicator())
-                : ListView.builder(
-              itemCount: movieViewModel.moviesByGenre.length,
-              itemBuilder: (context, index) {
-                final movie = movieViewModel.moviesByGenre[index];
-                return ListTile(
-                  leading: Image.network(
-                    '$imageUrl${movie.posterPath}',
-                  ),
-                  title: Text(
-                    movie.title,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  subtitle: Text(
-                    movie.overview,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  onTap: () async {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ChangeNotifierProvider(
-                          create: (_) => MovieDetailViewModel(
-                            getMovieDetailByMovieIdUseCase:
-                            GetMovieDetailByMovieIdUseCase(
-                              movieRepository: MovieRepositoryImpl(
-                                  movieApi: MovieApi()),
+                    ? const Center(child: CircularProgressIndicator())
+                    : ListView.builder(
+                        itemCount: movieViewModel.movies.length,
+                        itemBuilder: (context, index) {
+                          final movie = movieViewModel.movies[index];
+                          return ListTile(
+                            leading: Image.network(
+                              '$imageUrl${movie.posterPath}',
                             ),
-                          ),
-                          child: MovieDetailView(
-                            movieId: movie.id,
-                            movieDetailViewModel: MovieDetailViewModel(
-                                getMovieDetailByMovieIdUseCase:
-                                GetMovieDetailByMovieIdUseCase(
-                                    movieRepository:
-                                    MovieRepositoryImpl(
-                                        movieApi:
-                                        MovieApi()))),
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
-            )),
+                            title: Text(
+                              movie.title,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            subtitle: Text(
+                              movie.overview,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ChangeNotifierProvider(
+                                    create: (_) => MovieDetailViewModel(
+                                      getMovieDetailByMovieIdUseCase:
+                                          GetMovieDetailByMovieIdUseCase(
+                                        movieRepository: MovieRepositoryImpl(
+                                          movieApi: MovieApi(),
+                                        ),
+                                      ),
+                                    ),
+                                    child: MovieDetailView(
+                                      movieId: movie.id,
+                                      movieDetailViewModel: MovieDetailViewModel(
+                                          getMovieDetailByMovieIdUseCase:
+                                              GetMovieDetailByMovieIdUseCase(
+                                                  movieRepository:
+                                                      MovieRepositoryImpl(
+                                                          movieApi:
+                                                              MovieApi()))),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      ))
+                : (movieViewModel.movies.isEmpty
+                    ? const Center(child: CircularProgressIndicator())
+                    : ListView.builder(
+                        itemCount: movieViewModel.movies.length,
+                        itemBuilder: (context, index) {
+                          final movie = movieViewModel.movies[index];
+                          return ListTile(
+                            leading: Image.network(
+                              '$imageUrl${movie.posterPath}',
+                            ),
+                            title: Text(
+                              movie.title,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            subtitle: Text(
+                              movie.overview,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ChangeNotifierProvider(
+                                    create: (_) => MovieDetailViewModel(
+                                      getMovieDetailByMovieIdUseCase:
+                                          GetMovieDetailByMovieIdUseCase(
+                                        movieRepository: MovieRepositoryImpl(
+                                            movieApi: MovieApi()),
+                                      ),
+                                    ),
+                                    child: MovieDetailView(
+                                      movieId: movie.id,
+                                      movieDetailViewModel: MovieDetailViewModel(
+                                          getMovieDetailByMovieIdUseCase:
+                                              GetMovieDetailByMovieIdUseCase(
+                                                  movieRepository:
+                                                      MovieRepositoryImpl(
+                                                          movieApi:
+                                                              MovieApi()))),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      )),
           )
         ],
       ),
